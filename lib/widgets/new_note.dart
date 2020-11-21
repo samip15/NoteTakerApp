@@ -9,6 +9,7 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
+  // bool init = true;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   DateTime _selectedDateTime;
@@ -37,6 +38,16 @@ class _AddNoteState extends State<AddNote> {
       });
     });
   }
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   if (init) {
+  //     _titleController.text = "Hello";
+  //     _descriptionController.text = "hello";
+  //   }
+  //   init = false;
+  // }
 
   @override
   Widget build(BuildContext context) {

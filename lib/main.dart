@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_taker_app/model/note_model.dart';
+import 'package:note_taker_app/widgets/edit_note.dart';
 import 'package:note_taker_app/widgets/new_note.dart';
 import 'package:note_taker_app/widgets/note_list.dart';
 
@@ -27,11 +28,17 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: NotePage(),
+      initialRoute: NotePage.routeName,
+      routes: {
+        NoteList.routeName: (ctx) => NotePage(),
+        EditNote.routeName: (ctx) => EditNote(),
+      },
     );
   }
 }
 
 class NotePage extends StatefulWidget {
+  static const String routeName = "/";
   @override
   _NotePageState createState() => _NotePageState();
 }

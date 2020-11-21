@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_taker_app/model/note_model.dart';
+import 'package:note_taker_app/widgets/edit_note.dart';
 
 class NoteList extends StatelessWidget {
+  static const String routeName = "/note_list";
   List<NoteModel> noteList;
   final Function deleteNote;
 
@@ -57,6 +59,15 @@ class NoteList extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 3, vertical: 10),
                     child: ListTile(
+                      onTap: () {
+                        Navigator.pushNamed(context, EditNote.routeName,
+                            arguments: NoteModel(
+                                title: noteList[index].title,
+                                description: noteList[index].description,
+                                id: noteList[index].id,
+                                transaction_date:
+                                    noteList[index].transaction_date));
+                      },
                       contentPadding: const EdgeInsets.all(0),
                       leading: Container(
                         width: 50,
