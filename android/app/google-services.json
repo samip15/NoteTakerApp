@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "503436770307",
+    "firebase_url": "https://notetaker-62aba-default-rtdb.firebaseio.com",
+    "project_id": "notetaker-62aba",
+    "storage_bucket": "notetaker-62aba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503436770307:android:057073494bf5976d336236",
+        "android_client_info": {
+          "package_name": "com.samip.note_taker_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503436770307-4m8k7ljb00r3vf1afub32cu4t864mqnj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOfYULFPinz7KYPLcNGdZdjvl6ywqyIfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503436770307-4m8k7ljb00r3vf1afub32cu4t864mqnj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

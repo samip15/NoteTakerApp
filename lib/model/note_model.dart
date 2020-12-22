@@ -43,6 +43,11 @@ class NoteModel with ChangeNotifier {
 
   List<NoteModel> _notes = [];
 
+  // Get The note List
+  List<NoteModel> get notes {
+    return [..._notes];
+  }
+
 // add note
   Future<void> addNotes(NoteModel model) async {
     // add to firebase
