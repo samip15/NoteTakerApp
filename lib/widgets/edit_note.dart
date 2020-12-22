@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_taker_app/model/note_model.dart';
+import 'package:provider/provider.dart';
 
 class EditNote extends StatefulWidget {
   static const String routeName = "/edit_note";
@@ -8,8 +9,44 @@ class EditNote extends StatefulWidget {
 }
 
 class _EditNoteState extends State<EditNote> {
+  ThemeData themeConst;
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  String _id;
+  String _description, _title;
+  DateTime _transaction_date;
+  final _formKey = GlobalKey<FormState>();
+  final _scafoldKey = GlobalKey<ScaffoldState>();
+  void _saveForm() async {
+    final isValid = _formKey.currentState.validate();
+    if (isValid) {
+      _formKey.currentState.save();
+      await _addOrUpdateNotes();
+    }
+  }
+
+  Future<void> _addOrUpdateNotes() async {
+    final newNotes = NoteModel(
+        id: DateTime.now().toString(),
+        description: _description,
+        transaction_date: _transaction_date,
+        title: _title);
+    try {
+      if (_id.isNotEmpty && _id != null) {
+        await Provider.of<NoteModel>(context, listen: false)
+            .updateNote(_id, newNotes);
+      } else {
+        await Provider.of<NoteModel>(context, listen: false).addNotes(newNotes);
+      }
+      Navigator.pop(context);
+    } catch (error) {
+      _scafoldKey.currentState.showSnackBar(SnackBar(
+        content: Text("Something Went Wrong! please try again"),
+        backgroundColor: themeConst.errorColor,
+      ));
+    }
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -22,6 +59,7 @@ class _EditNoteState extends State<EditNote> {
   Widget build(BuildContext context) {
     final String titleText = titleController.value.text;
     final String descriptionText = descriptionController.value.text;
+    themeConst = Theme.of(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -34,7 +72,9 @@ class _EditNoteState extends State<EditNote> {
                 Icons.save,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                _saveForm();
+              },
             )
           ],
         ),
@@ -51,6 +91,9 @@ class _EditNoteState extends State<EditNote> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
+                onSubmitted: (value) {
+                  _title = value;
+                },
               ),
             ),
             Padding(
@@ -67,6 +110,9 @@ class _EditNoteState extends State<EditNote> {
                 ),
                 keyboardType: TextInputType.multiline,
                 textInputAction: TextInputAction.done,
+                onSubmitted: (value) {
+                  _description = value;
+                },
               ),
             ),
           ],
